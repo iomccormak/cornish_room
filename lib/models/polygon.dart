@@ -1,6 +1,3 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:cornell_box/models/interfaces.dart';
 import 'package:cornell_box/models/point.dart';
 import 'package:cornell_box/models/ray.dart';
@@ -61,3 +58,5 @@ class Polygon implements IPoints {
     return sum / points.length;
   }
 }
+
+enum PolyhedronType { cube }

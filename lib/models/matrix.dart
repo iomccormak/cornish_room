@@ -33,69 +33,8 @@ class Matrix {
       [0, 0, (2 * far * near) / (near - far), 0]
     ]);
   }
-
-  Matrix.cameraOrthographic(double near, double far) : value = []{
-    double height = 2;
-    double width = 2;
-
-    double left = -width / 2;
-    double right = width / 2;
-    double bottom = -height / 2;
-    double top = height / 2;
-
-    value.addAll([
-      [2 / width, 0, 0, 0],
-      [0, 2 / height, 0, 0],
-      [0, 0, -2 / (far - near), 0],
-      [-(right + left) / (right - left), -(top + bottom) / (top - bottom), -(far + near) / (far - near), 1]
-    ]);
-  }
-
+  
   Matrix.point(Point3D point) : this(1, 4, [[point.x, point.y, point.z, 1]]);
-
-  Matrix.trimetric(double xAngle, double yAngle)
-    : this(4, 4,
-      [
-        [cos(yAngle), sin(xAngle) * sin(yAngle), 0, 0],
-        [0, cos(xAngle), 0, 0],
-        [sin(yAngle), -sin(xAngle) * cos(yAngle), 0, 0],
-        [0, 0, 0, 1],
-      ]
-  );
-
-  Matrix.dimetric(double zRatio, bool xAnglePos, bool yAnglePos) : this.trimetric(
-    asin(zRatio * (xAnglePos ? 1 : -1) / sqrt2),
-    asin(zRatio * (yAnglePos ? 1 : -1) / sqrt(2 - zRatio * zRatio))
-  );
-
-  Matrix.isometric(bool xAnglePos, bool yAnglePos) : this.dimetric(0.8165, xAnglePos, yAnglePos);
-
-  Matrix.perspective1(double zProjectionCenter) : this(4, 4,
-    [
-      [1, 0, 0, 0],
-      [0, 1, 0, 0],
-      [0, 0, 0, -1/zProjectionCenter],
-      [0, 0, 0, 1],
-    ]
-  );
-
-  Matrix.perspective2(double xProjectionCenter, double yProjectionCenter) : this(4, 4,
-    [
-      [1, 0, 0, -1/xProjectionCenter],
-      [0, 1, 0, -1/yProjectionCenter],
-      [0, 0, 0, 0],
-      [0, 0, 0, 1],
-    ]
-  );
-
-  Matrix.perspective3(double xProjectionCenter, double yProjectionCenter, double zProjectionCenter) : this(4, 4,
-    [
-      [1, 0, 0, -1/xProjectionCenter],
-      [0, 1, 0, -1/yProjectionCenter],
-      [0, 0, 0, -1/zProjectionCenter],
-      [0, 0, 0, 1],
-    ]
-  );
 
   Matrix.translation(Point3D tr)
     : this(4, 4,
@@ -126,20 +65,7 @@ class Matrix {
       [0, 0, 0, 1]
     ]
   );
-
-  factory Matrix.mirrorXY() {
-    return Matrix.scaling(Point3D(1,1,-1));
-  }
-
-  factory Matrix.mirrorYZ() {
-    return Matrix.scaling(Point3D(-1,1,1));
-  }
-
-  factory Matrix.mirrorXZ() {
-    return Matrix.scaling(Point3D(1,-1,1));
-  }
-
-
+  
   final List<List<double>> value;
 
   int get rows => value.length;

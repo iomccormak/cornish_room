@@ -67,119 +67,138 @@ class MainCubit extends Cubit<MainState> {
           .getTransformed(Matrix.scaling(Point3D(0.5, 0.5, 0.5)))
           .getTransformed(Matrix.translation(Point3D(-0.4, -1, 0.4))),
       Sphere(
-          reflectivity: configuration[1] == '1' ? 0.85 : 0.0,
-          color: Colors.green,
-          radius: 0.3,
-          transparency: 0.0,
-          center: Point3D(0.0, 0.5, 0.6),
-          specularStrength: 0.4,
-          shininess: 8),
+        reflectivity: configuration[1] == '1' ? 0.85 : 0.0,
+        color: Colors.green,
+        radius: 0.3,
+        transparency: 0.0,
+        center: Point3D(0.0, 0.5, 0.6),
+        specularStrength: 0.4,
+        shininess: 8,
+      ),
       Sphere(
-          reflectivity: 0.0,
-          color: Colors.yellow,
-          radius: 0.3,
-          transparency: configuration[3] == '1' ? 0.95 : 0.0,
-          center: Point3D(-0.8, -0.7, 0.6),
-          specularStrength: 0.4,
-          shininess: 8),
+        reflectivity: 0.0,
+        color: Colors.yellow,
+        radius: 0.3,
+        transparency: configuration[3] == '1' ? 0.95 : 0.0,
+        center: Point3D(-0.8, -0.7, 0.6),
+        specularStrength: 0.4,
+        shininess: 8,
+      ),
       // left
       Model(
-          specularStrength: 0.0,
-          reflectivity: configuration[0] == '2' ? 0.85 : 0.0,
-          color: Colors.red,
-          points: [
-            Point3D(-1.2, 1, 0),
-            Point3D(-1.2, -1, 0),
-            Point3D(-1.2, -1, 5),
-            Point3D(-1.2, 1, 5)
-          ],
-          polygonsByIndexes: [
-            [0, 1, 2],
-            [2, 3, 0]
-          ]),
+        specularStrength: 0.0,
+        reflectivity: configuration[0] == '2' ? 0.85 : 0.0,
+        color: Colors.red,
+        points: [
+          Point3D(-1.2, 1, 0),
+          Point3D(-1.2, -1, 0),
+          Point3D(-1.2, -1, 5),
+          Point3D(-1.2, 1, 5)
+        ],
+        polygonsByIndexes: [
+          [0, 1, 2],
+          [2, 3, 0]
+        ],
+      ),
       // bottom
       Model(
-          specularStrength: 0.0,
-          reflectivity: configuration[0] == '3' ? 0.85 : 0.0,
-          color: Colors.grey,
-          points: [
-            Point3D(-1.2, -1, 0),
-            Point3D(1.2, -1, 0),
-            Point3D(-1.2, -1, 5),
-            Point3D(1.2, -1, 5)
-          ],
-          polygonsByIndexes: [
-            [0, 1, 2],
-            [1, 3, 2]
-          ]),
+        specularStrength: 0.0,
+        reflectivity: configuration[0] == '3' ? 0.85 : 0.0,
+        color: Colors.grey,
+        points: [
+          Point3D(-1.2, -1, 0),
+          Point3D(1.2, -1, 0),
+          Point3D(-1.2, -1, 5),
+          Point3D(1.2, -1, 5)
+        ],
+        polygonsByIndexes: [
+          [0, 1, 2],
+          [1, 3, 2]
+        ],
+      ),
       // right
       Model(
-          specularStrength: 0.0,
-          reflectivity: configuration[0] == '4' ? 0.85 : 0.0,
-          color: Colors.blue,
-          points: [
-            Point3D(1.2, -1, 0),
-            Point3D(1.2, 1, 0),
-            Point3D(1.2, -1, 5),
-            Point3D(1.2, 1, 5)
-          ],
-          polygonsByIndexes: [
-            [0, 1, 2],
-            [2, 1, 3]
-          ]),
+        specularStrength: 0.0,
+        reflectivity: configuration[0] == '4' ? 0.85 : 0.0,
+        color: Colors.blue,
+        points: [
+          Point3D(1.2, -1, 0),
+          Point3D(1.2, 1, 0),
+          Point3D(1.2, -1, 5),
+          Point3D(1.2, 1, 5)
+        ],
+        polygonsByIndexes: [
+          [0, 1, 2],
+          [2, 1, 3]
+        ],
+      ),
       // top
       Model(
-          specularStrength: 0.0,
-          reflectivity: configuration[0] == '5' ? 0.85 : 0.0,
-          color: Colors.grey,
-          points: [
-            Point3D(1.2, 1, 0),
-            Point3D(-1.2, 1, 5),
-            Point3D(1.2, 1, 5),
-            Point3D(-1.2, 1, 0)
-          ],
-          polygonsByIndexes: [
-            [0, 1, 2],
-            [0, 3, 1]
-          ]),
-      // right
+        specularStrength: 0.0,
+        reflectivity: configuration[0] == '5' ? 0.85 : 0.0,
+        color: Colors.green,
+        points: [
+          Point3D(1.2, 1, 0),
+          Point3D(-1.2, 1, 5),
+          Point3D(1.2, 1, 5),
+          Point3D(-1.2, 1, 0)
+        ],
+        polygonsByIndexes: [
+          [0, 1, 2],
+          [0, 3, 1]
+        ],
+      ),
+      // forward
       Model(
-          specularStrength: 0.0,
-          reflectivity: configuration[0] == '6' ? 0.85 : 0.0,
-          color: Colors.grey,
-          points: [
-            Point3D(1.2, 1, 0),
-            Point3D(1.2, -1, 0),
-            Point3D(-1.2, -1, 0),
-            Point3D(-1.2, 1, 0)
-          ],
-          polygonsByIndexes: [
-            [0, 1, 2],
-            [2, 3, 0]
-          ]),
+        specularStrength: 0.0,
+        reflectivity: configuration[0] == '6' ? 0.85 : 0.0,
+        color: Colors.yellow,
+        points: [
+          Point3D(1.2, 1, 0),
+          Point3D(1.2, -1, 0),
+          Point3D(-1.2, -1, 0),
+          Point3D(-1.2, 1, 0)
+        ],
+        polygonsByIndexes: [
+          [0, 1, 2],
+          [2, 3, 0]
+        ],
+      ),
     ];
   }
 
-  void render(String configuration) async {
+  void render(String configuration, Light? secondLight) async {
     emit(const LoadingState());
-    _view = Matrix.view(camera.eye, camera.target, camera.up);
-    _projection = Matrix.cameraPerspective(
-        camera.fov, width / height, camera.nearPlane, camera.farPlane);
 
-    if (_pixels.containsKey(configuration) && configuration[5] == '1') {
-      emit(CommonState(pixels: _pixels[configuration]!));
-      return;
-    } else {
-      _pixels[configuration] =
-          List.generate(height, (_) => List.filled(width, null));
-      _buildScene(configuration);
+    _view = Matrix.view(
+      camera.eye,
+      camera.target,
+      camera.up,
+    );
+
+    _projection = Matrix.cameraPerspective(
+      camera.fov,
+      width / height,
+      camera.nearPlane,
+      camera.farPlane,
+    );
+
+    if (secondLight != null) {
+      lights.add(secondLight);
     }
+
+    _pixels[configuration] = List.generate(
+      height,
+      (_) => List.filled(width, null),
+    );
+    _buildScene(configuration);
 
     for (var pixelRay in camera.getRays(width, height)) {
       final pixel = pixelRay.pixel;
       Point3D color = Point3D(0, 0, 0);
       int numSamples = 0;
       Point3D? rayColor;
+
       for (var ray in pixelRay.rays) {
         rayColor = _traceRay(ray, 7);
         if (rayColor != null) {
@@ -187,39 +206,62 @@ class MainCubit extends Cubit<MainState> {
           color += rayColor;
         }
       }
+
       if (numSamples > 0) {
-        final resColor = Color.fromRGBO(color.x * 255 ~/ numSamples,
-            color.y * 255 ~/ numSamples, color.z * 255 ~/ numSamples, 1.0);
+        final resColor = Color.fromRGBO(
+          color.x * 255 ~/ numSamples,
+          color.y * 255 ~/ numSamples,
+          color.z * 255 ~/ numSamples,
+          1.0,
+        );
         _pixels[configuration]![pixel.dy.toInt()][pixel.dx.toInt()] =
             (color: resColor, pos: pixel);
       }
     }
+
     emit(CommonState(pixels: _pixels[configuration]!));
+    if (secondLight != null) {
+      lights.removeLast();
+    }
   }
 
   Point3D? _traceRay(Ray ray, int depth) {
     if (depth <= 0) {
       return Point3D(0, 0, 0);
     }
+
     graphics.Object? intersectionObject;
     Intersection? nearestIntersection;
+
     for (var object in scene) {
       var intersection = object.intersect(
-          camera: camera, projection: _projection, view: _view, ray: ray);
+        camera: camera,
+        projection: _projection,
+        view: _view,
+        ray: ray,
+      );
+
       if (intersection == null) {
         continue;
       }
+
       if (nearestIntersection == null ||
           intersection.z < nearestIntersection.z) {
         nearestIntersection = intersection;
         intersectionObject = object;
       }
     }
+
     if (nearestIntersection != null) {
       if (intersectionObject!.transparency > 0.1) {
         Point3D light = Point3D.zero();
+
         Ray? refractedRay = _refract(
-            ray, nearestIntersection, intersectionObject.refractiveIndex);
+          ray,
+          nearestIntersection,
+          intersectionObject.refractiveIndex,
+        );
+
         if (refractedRay != null) {
           light += (_traceRay(refractedRay, depth - 1) ?? Point3D(0, 0, 0)) *
               intersectionObject.transparency;
@@ -228,11 +270,16 @@ class MainCubit extends Cubit<MainState> {
       }
 
       if (intersectionObject.reflectivity > 0.1) {
-        Point3D reflectedRayDirection =
-            _reflect(ray.direction, nearestIntersection.normal);
+        Point3D reflectedRayDirection = _reflect(
+          ray.direction,
+          nearestIntersection.normal,
+        );
+
         Ray reflectedRay = Ray(
-            start: nearestIntersection.hit + reflectedRayDirection * 0.001,
-            direction: reflectedRayDirection);
+          start: nearestIntersection.hit + reflectedRayDirection * 0.001,
+          direction: reflectedRayDirection,
+        );
+
         Point3D reflectedColor =
             _traceRay(reflectedRay, depth - 1) ?? Point3D(0, 0, 0);
         return reflectedColor * intersectionObject.reflectivity;
@@ -241,17 +288,19 @@ class MainCubit extends Cubit<MainState> {
       Point3D light = _calcLocalLight(nearestIntersection, intersectionObject);
       return light.multiply(intersectionObject.objectColor);
     }
+
     return null;
   }
-
-  final Random _random = Random();
 
   Point3D _reflect(Point3D vector, Point3D normal) {
     return vector - normal * 2 * vector.dot(normal);
   }
 
   Ray? _refract(
-      Ray incidentRay, Intersection intersection, double refractiveIndex) {
+    Ray incidentRay,
+    Intersection intersection,
+    double refractiveIndex,
+  ) {
     double ratio = intersection.inside ? refractiveIndex : 1 / refractiveIndex;
     final incident = incidentRay.direction.normalized();
     final normal =
@@ -264,8 +313,11 @@ class MainCubit extends Cubit<MainState> {
       return null;
     } else {
       final refracted = incident * ratio - normal * (sqrt(k) + ratio * cosi);
+
       return Ray(
-          start: intersection.hit + refracted * 0.001, direction: refracted);
+        start: intersection.hit + refracted * 0.001,
+        direction: refracted,
+      );
     }
   }
 
@@ -277,12 +329,17 @@ class MainCubit extends Cubit<MainState> {
       bool inShadow = false;
       for (var object in scene) {
         final shadowRay = Ray(
-            start: intersection.hit - lightDir * 0.001, direction: -lightDir);
+          start: intersection.hit - lightDir * 0.001,
+          direction: -lightDir,
+        );
+
         final shadowIntersection = object.intersect(
-            ray: shadowRay,
-            view: _view,
-            projection: _projection,
-            camera: camera);
+          ray: shadowRay,
+          view: _view,
+          projection: _projection,
+          camera: camera,
+        );
+
         if (shadowIntersection != null &&
             (intersection.hit - light.position).length() >
                 (intersection.hit - shadowIntersection.hit).length()) {

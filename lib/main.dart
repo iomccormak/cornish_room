@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cornell_box/painters/app_painter.dart';
+import 'package:cornell_box/widgets/app_painter.dart';
 import 'package:cornell_box/bloc/main_bloc.dart';
 import 'package:cornell_box/widgets/toolbar.dart';
 

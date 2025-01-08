@@ -48,21 +48,4 @@ class Camera{
     }
     return rays;
   }
-
-  Camera copyWith({
-    Point3D? eye,
-    Point3D? target,
-    Point3D? up,
-    double? nearPlane,
-    double? farPlane,
-    double? fov,
-    double? aspect,
-  }) => Camera(
-    eye: eye ?? this.eye,
-    target: target ?? this.target,
-    up: up ?? this.up,
-    nearPlane: nearPlane ?? this.nearPlane,
-    farPlane: farPlane ?? this.farPlane,
-    fov: fov ?? this.fov,
-  );
 }

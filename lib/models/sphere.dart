@@ -12,6 +12,7 @@ class Sphere implements Object{
   final Point3D center;
   final double radius;
   final Color color;
+  
   @override
   final double specularStrength;
   @override

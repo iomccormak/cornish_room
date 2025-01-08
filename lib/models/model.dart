@@ -29,16 +29,16 @@ class Model implements IPoints, Object {
   @override
   final double refractiveIndex;
 
-  Model(
-      {required this.points,
-      required this.polygonsByIndexes,
-      required this.color,
-      this.shininess = 8,
-      this.specularStrength = 0.5,
-      this.reflectivity = 0.0,
-      this.transparency = 0.0,
-      this.refractiveIndex = 1.05})
-      : polygons = [] {
+  Model({
+    required this.points,
+    required this.polygonsByIndexes,
+    required this.color,
+    this.shininess = 8,
+    this.specularStrength = 0.5,
+    this.reflectivity = 0.0,
+    this.transparency = 0.0,
+    this.refractiveIndex = 1.05,
+  }) : polygons = [] {
     for (var polygonIndexes in polygonsByIndexes) {
       polygons.add(Polygon(List.generate(
           polygonIndexes.length, (i) => points[polygonIndexes[i]])));
@@ -50,11 +50,12 @@ class Model implements IPoints, Object {
       Point3D(color.red / 255, color.green / 255, color.blue / 255, 1.0);
 
   @override
-  Intersection? intersect(
-      {required Ray ray,
-      required Camera camera,
-      required Matrix view,
-      required Matrix projection}) {
+  Intersection? intersect({
+    required Ray ray,
+    required Camera camera,
+    required Matrix view,
+    required Matrix projection,
+  }) {
     Intersection? nearestRes;
     double nearestZ = double.infinity;
     for (var polygon in polygons) {
@@ -94,37 +95,15 @@ class Model implements IPoints, Object {
 
   Model copy() {
     return Model(
-        reflectivity: reflectivity,
-        shininess: shininess,
-        specularStrength: specularStrength,
-        color: color,
-        transparency: transparency,
-        refractiveIndex: refractiveIndex,
-        points: List.generate(points.length, (index) => points[index].copy()),
-        polygonsByIndexes: polygonsByIndexes);
-  }
-
-  Model concat(Model other) {
-    List<Point3D> resPoints = [];
-    List<List<int>> resIndexes = [];
-
-    for (var p in points) {
-      resPoints.add(p.copy());
-    }
-    for (var p in other.points) {
-      resPoints.add(p.copy());
-    }
-
-    for (var pol in polygonsByIndexes) {
-      resIndexes.add(List.from(pol));
-    }
-    int len = points.length;
-    for (var pol in other.polygonsByIndexes) {
-      resIndexes.add(pol.map((e) => e + len).toList());
-    }
-
-    return Model(
-        color: color, points: resPoints, polygonsByIndexes: resIndexes);
+      reflectivity: reflectivity,
+      shininess: shininess,
+      specularStrength: specularStrength,
+      color: color,
+      transparency: transparency,
+      refractiveIndex: refractiveIndex,
+      points: List.generate(points.length, (index) => points[index].copy()),
+      polygonsByIndexes: polygonsByIndexes,
+    );
   }
 
   Model.cube({
@@ -134,33 +113,34 @@ class Model implements IPoints, Object {
     double reflectivity = 0.0,
     double transparency = 0.0,
   }) : this(
-            reflectivity: reflectivity,
-            transparency: transparency,
-            specularStrength: specularStrength,
-            shininess: shininess,
-            points: [
-              Point3D(1, 0, 0),
-              Point3D(1, 1, 0),
-              Point3D(0, 1, 0),
-              Point3D(0, 0, 0),
-              Point3D(0, 0, 1),
-              Point3D(0, 1, 1),
-              Point3D(1, 1, 1),
-              Point3D(1, 0, 1),
-            ],
-            color: color,
-            polygonsByIndexes: [
-              [0, 1, 2],
-              [2, 3, 0],
-              [5, 2, 1],
-              [1, 6, 5],
-              [4, 5, 6],
-              [6, 7, 4],
-              [3, 4, 7],
-              [7, 0, 3],
-              [7, 6, 1],
-              [1, 0, 7],
-              [3, 2, 5],
-              [5, 4, 3],
-            ]);
+          reflectivity: reflectivity,
+          transparency: transparency,
+          specularStrength: specularStrength,
+          shininess: shininess,
+          points: [
+            Point3D(1, 0, 0),
+            Point3D(1, 1, 0),
+            Point3D(0, 1, 0),
+            Point3D(0, 0, 0),
+            Point3D(0, 0, 1),
+            Point3D(0, 1, 1),
+            Point3D(1, 1, 1),
+            Point3D(1, 0, 1),
+          ],
+          color: color,
+          polygonsByIndexes: [
+            [0, 1, 2],
+            [2, 3, 0],
+            [5, 2, 1],
+            [1, 6, 5],
+            [4, 5, 6],
+            [6, 7, 4],
+            [3, 4, 7],
+            [7, 0, 3],
+            [7, 6, 1],
+            [1, 0, 7],
+            [3, 2, 5],
+            [5, 4, 3],
+          ],
+        );
 }

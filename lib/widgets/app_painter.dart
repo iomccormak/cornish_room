@@ -22,7 +22,6 @@ class AppPainter extends CustomPainter{
         }
       }
     }
-    print('done');
   }
 
   static final _paint = Paint()

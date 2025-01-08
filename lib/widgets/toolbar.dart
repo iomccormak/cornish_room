@@ -18,9 +18,8 @@ class _ToolBarState extends State<ToolBar> {
   bool _cubeReflective = true;
   bool _sphereTransparent = true;
   bool _cubeTransparent = false;
-  bool _softShadows = false;
   bool _secondLight = false;
-  final _lightController = TextEditingController(text: '-0.96;0;1.4');
+  final _lightController = TextEditingController(text: '-1;0;1.4');
 
   void _radioOnChanged(int? value) {
     if (value != null) {
@@ -134,8 +133,9 @@ class _ToolBarState extends State<ToolBar> {
                   children: [
                     Radio(
                       visualDensity: const VisualDensity(
-                          horizontal: VisualDensity.minimumDensity,
-                          vertical: VisualDensity.minimumDensity),
+                        horizontal: VisualDensity.minimumDensity,
+                        vertical: VisualDensity.minimumDensity,
+                      ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       value: 6,
                       groupValue: _reflectiveWall,
@@ -236,15 +236,59 @@ class _ToolBarState extends State<ToolBar> {
                 const SizedBox(
                   height: 30,
                 ),
+                const Text(
+                  'Работа со светом:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _secondLight,
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() {
+                            _secondLight = value;
+                          });
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('Второй источник света'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: _lightController,
+                ),
+                const SizedBox(height: 30),
                 GestureDetector(
                   onTap: () {
+                    Light? secondLight;
+                    if (_secondLight) {
+                      final values = _lightController.text
+                          .split(';')
+                          .map((e) => double.parse(e.trim()))
+                          .toList();
+                      secondLight = Light(
+                        position: Point3D(values[0], values[1], values[2]),
+                        width: 1.0,
+                        height: 0.5,
+                        step: 0.03,
+                        color: Point3D(0.6, 0.6, 0.6),
+                      );
+                    }
                     context.read<MainCubit>().render(
                         '$_reflectiveWall'
                         '${_sphereReflective ? 1 : 0}'
                         '${_cubeReflective ? 1 : 0}'
                         '${_sphereTransparent ? 1 : 0}'
-                        '${_cubeTransparent ? 1 : 0}'
-                        '${_softShadows ? 1 : 0}');
+                        '${_cubeTransparent ? 1 : 0}',
+                        secondLight);
                   },
                   child: Container(
                     width: double.infinity,
