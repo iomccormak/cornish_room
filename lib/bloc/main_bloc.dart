@@ -253,6 +253,7 @@ class MainCubit extends Cubit<MainState> {
     }
 
     if (nearestIntersection != null) {
+      // преломление
       if (intersectionObject!.transparency > 0.1) {
         Point3D light = Point3D.zero();
 
@@ -269,6 +270,7 @@ class MainCubit extends Cubit<MainState> {
         return light;
       }
 
+      // отражение
       if (intersectionObject.reflectivity > 0.1) {
         Point3D reflectedRayDirection = _reflect(
           ray.direction,

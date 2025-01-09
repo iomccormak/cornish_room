@@ -41,7 +41,7 @@ class Camera{
           pixel: Offset(x, y),
           rays: [
             getRay(x, y, width, height),
-            ...List.generate(0, (index) => getRay(x + random.nextDouble() - 0.5, y + random.nextDouble() - 0.5, width, height))
+            ...List.generate(2, (index) => getRay(x + random.nextDouble() - 0.5, y + random.nextDouble() - 0.5, width, height))
           ]
         ));
       }

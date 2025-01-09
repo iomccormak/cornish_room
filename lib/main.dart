@@ -46,19 +46,7 @@ class _MainPageState extends State<MainPage> {
     return Material(
       child: Scaffold(
         body: BlocConsumer<MainCubit, MainState>(
-          listener: (context, state) {
-            if (state.message != null) {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                behavior: SnackBarBehavior.floating,
-                width: 700,
-                content: Text(
-                  state.message!,
-                  textAlign: TextAlign.center,
-                ),
-              ));
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,31 +54,31 @@ class _MainPageState extends State<MainPage> {
                 const SizedBox(width: 305, child: ToolBar()),
                 Expanded(
                   child: RepaintBoundary(
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      context.read<MainCubit>().width =
-                          constraints.maxWidth.toInt();
-                      context.read<MainCubit>().height =
-                          constraints.maxHeight.toInt();
-                      return GestureDetector(
-                        onPanDown: (details) {
-                          print(details);
-                        },
-                        child: ClipRRect(
-                          key: canvasAreaKey,
-                          child: CustomPaint(
-                            foregroundPainter: switch (state) {
-                              CommonState() => AppPainter(pixels: state.pixels),
-                              _ => null
-                            },
-                            child: Container(
-                              color: Theme.of(context).colorScheme.background,
-                              width: double.infinity,
-                              height: double.infinity,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        context.read<MainCubit>().width =
+                            constraints.maxWidth.toInt();
+                        context.read<MainCubit>().height =
+                            constraints.maxHeight.toInt();
+                        return GestureDetector(
+                          child: ClipRRect(
+                            key: canvasAreaKey,
+                            child: CustomPaint(
+                              foregroundPainter: switch (state) {
+                                CommonState() =>
+                                  AppPainter(pixels: state.pixels),
+                                _ => null
+                              },
+                              child: Container(
+                                color: Theme.of(context).colorScheme.background,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

@@ -8,21 +8,21 @@ import 'package:cornell_box/models/point.dart';
 import 'package:cornell_box/models/interfaces.dart';
 import 'package:cornell_box/models/ray.dart';
 
-class Sphere implements Object{
+class Sphere implements Object {
   final Point3D center;
   final double radius;
   final Color color;
-  
+
   @override
   final double specularStrength;
   @override
   final double shininess;
   @override
   final double reflectivity;
-  @override
+  @override 
   final double transparency;
   @override
-  final double refractiveIndex ;
+  final double refractiveIndex;
 
   Sphere({
     required this.color,
@@ -32,24 +32,19 @@ class Sphere implements Object{
     this.specularStrength = 0.5,
     this.reflectivity = 0.0,
     this.transparency = 0.0,
-    this.refractiveIndex = 1.03
+    this.refractiveIndex = 1.03,
   });
 
   @override
-  Point3D get objectColor => Point3D(
-    color.red / 255,
-    color.green / 255,
-    color.blue / 255,
-    1.0
-  );
+  Point3D get objectColor =>
+      Point3D(color.red / 255, color.green / 255, color.blue / 255, 1.0);
 
   @override
-  Intersection? intersect({
-    required Ray ray,
-    required Camera camera,
-    required Matrix view,
-    required Matrix projection
-  }) {
+  Intersection? intersect(
+      {required Ray ray,
+      required Camera camera,
+      required Matrix view,
+      required Matrix projection}) {
     Point3D oc = ray.start - center;
     double a = ray.direction.dot(ray.direction);
     double b = 2.0 * oc.dot(ray.direction);
@@ -66,11 +61,10 @@ class Sphere implements Object{
       final normal = (intersection - center).normalized();
       if (t >= 0) {
         return Intersection(
-          inside: ray.direction.dot(normal) > 0,
-          normal: normal,
-          hit: intersection,
-          z: (intersection - ray.start).length()
-        );
+            inside: ray.direction.dot(normal) > 0,
+            normal: normal,
+            hit: intersection,
+            z: (intersection - ray.start).length());
       } else {
         return null;
       }
